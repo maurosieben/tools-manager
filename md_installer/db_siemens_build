@@ -1,0 +1,13 @@
+#! /bin/bash
+ECHO= 
+
+# Functions
+ok() { echo -e '\e[32m'$db_name'\e[m'; } # Green
+ 
+prog_dir=$(dirname $0)
+db_config_file=${1:-"$prog_dir/db_siemens_config.sh"}
+. $db_config_file
+
+$ECHO mysql -uroot -pptcdashboard < $prog_dir/siemens-db.sql
+ 
+ok "Database $db_name and table $table_name created"
